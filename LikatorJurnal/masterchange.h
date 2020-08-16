@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QCompleter>
+#include <QDebug>
 
 namespace Ui {
 class MasterChange;
@@ -22,10 +23,20 @@ public:
     ~MasterChange();
 
 private slots:
-    void updateFindLine();
+    void updateFindLine(QString currentCat);
+    void insertCompletion(QString);
+    void on_CanselButton_clicked();
+
+    void on_AddButton_clicked();
+
+signals:
+    void SendUpdateMaster(int idMaster);
+
 
 private:
     Ui::MasterChange *ui;
+    QMap<QString,int> idCatAndComboIndex;
+    QMap<QString,int> nameIdMaster;
 };
 
 #endif // MASTERCHANGE_H

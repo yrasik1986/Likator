@@ -37,6 +37,7 @@ SOURCES += \
     mainwindow.cpp \
     master.cpp \
     masterchange.cpp \
+    masterupdate.cpp \
     mydb.cpp \
     mymodelsql.cpp \
     politicdiscont.cpp \
@@ -69,6 +70,7 @@ HEADERS  += \
     mainwindow.h \
     master.h \
     masterchange.h \
+    masterupdate.h \
     mydb.h \
     mymodelsql.h \
     politicdiscont.h \
@@ -98,6 +100,7 @@ FORMS    += \
     mainwindow.ui \
     master.ui \
     masterchange.ui \
+    masterupdate.ui \
     politicdiscont.ui \
     prizcode.ui \
     service.ui \

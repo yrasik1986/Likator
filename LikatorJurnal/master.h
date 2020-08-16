@@ -12,6 +12,7 @@
 #include <QSqlTableModel>
 #include "addmaster.h"
 #include "masterchange.h"
+#include "masterupdate.h"
 
 namespace Ui {
 class Master;
@@ -25,7 +26,8 @@ public:
     explicit Master(QWidget *parent = nullptr);
     ~Master();
 public slots:
-    void UpdateTable();
+    void ShowTable();
+    void UpdateTable(int idMaster);
 
 private slots:
     void on_addButton_clicked();
@@ -35,6 +37,7 @@ private:
     Ui::Master *ui;
     AddMaster* addMaster;
     MasterChange* masterChange;
+    MasterUpdate* masterUpdate;
 };
 
 #endif // MASTER_H

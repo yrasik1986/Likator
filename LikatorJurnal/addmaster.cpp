@@ -5,7 +5,7 @@ AddMaster::AddMaster(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddMaster)
 {
-//    ui->setupUi(this);
+   ui->setupUi(this);
 //    if(type == "add") {
 //        ui->UpdateButton->close();
 //        ui->AddButton->show();
@@ -15,15 +15,25 @@ AddMaster::AddMaster(QWidget *parent) :
 //        ui->AddButton->close();
 
 //    }
-    QSqlQuery sqlQ;
-    if(sqlQ.exec("SELECT name, id FROM cat_masters")) {
-        ui->CatMastersComboBox->clear();
-        int i = 0;
-        while (sqlQ.next()){
-            ui->CatMastersComboBox->addItem(sqlQ.value(0).toString(),i++);
-            idCatAndComboIndex[sqlQ.value(0).toString()] = sqlQ.value(1).toInt();
-        }
+    QSqlQuery q;
+    q.prepare("SELECT name, id FROM cat_masters");
+    if (q.exec()) {
+        int i = 1;
+                while (q.next()){
+                    qDebug() << q.value(0).toString();
+                    ui->CatMastersComboBox->addItem(q.value(0).toString(),i++);
+                    idCatAndComboIndex[q.value(0).toString()] = q.value(1).toInt();
+                }
+
     }
+//    if(q.exec()) {
+//        ui->CatMastersComboBox->clear();
+//        int i = 0;
+//        while (q.next()){
+//            ui->CatMastersComboBox->addItem(q.value(0).toString(),i++);
+//            idCatAndComboIndex[q.value(0).toString()] = q.value(1).toInt();
+//        }
+//    }
 }
 
 AddMaster::~AddMaster()

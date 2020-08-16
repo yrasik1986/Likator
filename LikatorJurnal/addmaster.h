@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QMap>
+#include <QDebug>
 
 namespace Ui {
 class AddMaster;

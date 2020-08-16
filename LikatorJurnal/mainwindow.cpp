@@ -611,7 +611,7 @@ void MainWindow::OpenCatMaster() {
 void MainWindow::OpenMaster(){
     master = new Master();
     master->setModal(true);
-    master->UpdateTable();
+    master->ShowTable();
     master->exec();
 }
 

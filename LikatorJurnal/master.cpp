@@ -17,7 +17,7 @@ Master::~Master()
 void Master::on_addButton_clicked()
 {
     addMaster = new AddMaster();
-    connect(addMaster, &AddMaster::SendUpdateTable, this, &Master::UpdateTable);
+    connect(addMaster, &AddMaster::SendUpdateTable, this, &Master::ShowTable);
     addMaster->setModal(true);
     addMaster->exec();
 }
@@ -25,12 +25,12 @@ void Master::on_addButton_clicked()
 void Master::on_changeButton_clicked()
 {
     masterChange = new MasterChange();
-    //connect(masterChange, &AddMaster::SendUpdateTable, this, &Master::UpdateTable);
+    connect(masterChange, &MasterChange::SendUpdateMaster, this, &Master::UpdateTable);
     masterChange->setModal(true);
     masterChange->exec();
 }
 
-void Master::UpdateTable(){
+void Master::ShowTable(){
     ui->tableView->setEditTriggers(QAbstractItemView::EditTrigger::AnyKeyPressed);
     ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
@@ -50,4 +50,12 @@ void Master::UpdateTable(){
     model->setHeaderData(2, Qt::Horizontal, tr("День Рождения"));
     model->setHeaderData(3, Qt::Horizontal, tr("телефон"));
     ui->tableView->resizeColumnsToContents();
+}
+
+void Master::UpdateTable(int idMaster)
+{
+    masterUpdate = new MasterUpdate(idMaster);
+    connect(masterUpdate, &MasterUpdate::SendUpdateTable, this, &Master::ShowTable);
+    masterUpdate->setModal(true);
+    masterUpdate->exec();
 }
