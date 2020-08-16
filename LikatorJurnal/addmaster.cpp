@@ -1,25 +1,27 @@
 #include "addmaster.h"
 #include "ui_addmaster.h"
 
-AddMaster::AddMaster(QString type,QWidget *parent) :
+AddMaster::AddMaster(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddMaster)
 {
-    ui->setupUi(this);
-    if(type == "add") {
-        ui->UpdateButton->close();
-        ui->AddButton->show();
+//    ui->setupUi(this);
+//    if(type == "add") {
+//        ui->UpdateButton->close();
+//        ui->AddButton->show();
 
-    } else if (type == "update") {
-        ui->UpdateButton->show();
-        ui->AddButton->close();
+//    } else if (type == "update") {
+//        ui->UpdateButton->show();
+//        ui->AddButton->close();
 
-    }
+//    }
     QSqlQuery sqlQ;
-    if(sqlQ.exec("SELECT id, name FROM cat_masters")) {
+    if(sqlQ.exec("SELECT name, id FROM cat_masters")) {
         ui->CatMastersComboBox->clear();
+        int i = 0;
         while (sqlQ.next()){
-            ui->CatMastersComboBox->addItem(sqlQ.value(1).toString(),sqlQ.value(0).toInt());
+            ui->CatMastersComboBox->addItem(sqlQ.value(0).toString(),i++);
+            idCatAndComboIndex[sqlQ.value(0).toString()] = sqlQ.value(1).toInt();
         }
     }
 }
@@ -40,7 +42,7 @@ void AddMaster::on_AddButton_clicked()
     QSqlQuery q;
     q.prepare(R"(INSERT INTO masters (id_cat_master, name_master, fam_master,
               firstname_master, birth_master, phone_master) values(?, ?, ?, ?, ?, ?))");
-    q.addBindValue(ui->CatMastersComboBox->currentIndex());
+    q.addBindValue(idCatAndComboIndex[ui->CatMastersComboBox->currentText()]);
     q.addBindValue(ui->nameLineEdit->text());
     q.addBindValue(ui->FamLineEdit->text());
     q.addBindValue(ui->FatheNameLineEdit->text());
@@ -49,10 +51,10 @@ void AddMaster::on_AddButton_clicked()
 
     if (q.exec()) {
         emit SendUpdateTable();
-        QMessageBox msbox;
-        msbox.setWindowTitle("Успех!");
-        msbox.setText("Мастер успешно записан в базу данных!");
-        msbox.exec();
+//        QMessageBox msbox;
+//        msbox.setWindowTitle("Успех!");
+//        msbox.setText("Мастер успешно записан в базу данных!");
+//        msbox.exec();
         this->close();
     } else {
         QMessageBox msbox;

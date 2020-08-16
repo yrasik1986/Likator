@@ -7,6 +7,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
+#include <QMap>
 
 namespace Ui {
 class AddMaster;
@@ -17,8 +18,7 @@ class AddMaster : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddMaster(QString type,
-                       QWidget *parent = nullptr);
+    explicit AddMaster(QWidget *parent = nullptr);
     ~AddMaster();
 signals:
     void SendUpdateTable();
@@ -30,6 +30,7 @@ private slots:
 
 private:
     Ui::AddMaster *ui;
+    QMap<QString,int> idCatAndComboIndex;
 };
 
 #endif // ADDMASTER_H

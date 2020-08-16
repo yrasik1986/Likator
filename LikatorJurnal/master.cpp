@@ -16,21 +16,22 @@ Master::~Master()
 
 void Master::on_addButton_clicked()
 {
-    addMaster = new AddMaster("add");
+    addMaster = new AddMaster();
+    connect(addMaster, &AddMaster::SendUpdateTable, this, &Master::UpdateTable);
     addMaster->setModal(true);
     addMaster->exec();
 }
 
 void Master::on_changeButton_clicked()
 {
-    addMaster = new AddMaster("update");
-    connect(addMaster, &AddMaster::SendUpdateTable, this, &Master::UpdateTable);
-    addMaster->setModal(true);
-    addMaster->exec();
+    masterChange = new MasterChange();
+    //connect(masterChange, &AddMaster::SendUpdateTable, this, &Master::UpdateTable);
+    masterChange->setModal(true);
+    masterChange->exec();
 }
 
 void Master::UpdateTable(){
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView->setEditTriggers(QAbstractItemView::EditTrigger::AnyKeyPressed);
     ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
     QSqlQueryModel *model = new QSqlQueryModel();

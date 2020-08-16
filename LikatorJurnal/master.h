@@ -11,6 +11,7 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include "addmaster.h"
+#include "masterchange.h"
 
 namespace Ui {
 class Master;
@@ -32,7 +33,8 @@ private slots:
 
 private:
     Ui::Master *ui;
-    AddMaster *addMaster;
+    AddMaster* addMaster;
+    MasterChange* masterChange;
 };
 
 #endif // MASTER_H

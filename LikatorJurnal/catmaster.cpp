@@ -17,7 +17,7 @@ CatMaster::~CatMaster()
 
 void CatMaster::on_addButton_clicked()
 {
-    addCatMaster = new AddCatMaster();
+    addCatMaster = new AddCatMaster(this);
     connect(addCatMaster, &AddCatMaster::UpdateCatMasters, this, &CatMaster::LoadCatMasters);
     addCatMaster->setModal(true);
     addCatMaster->exec();

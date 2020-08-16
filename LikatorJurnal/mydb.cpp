@@ -76,15 +76,15 @@ MyDb::MyDb(QObject *parent) : QObject(parent),
                     FOREIGN KEY (id_cat_master) REFERENCES cat_masters(id) ON DELETE CASCADE ON UPDATE CASCADE))"),
 
     DAY_MASTERS_SQL(R"(CREATE TABLE day_master (
-      id INTEGER primary key,
-      id_service,
-      id_client,
-      id_master,
-      cur_time DATETIME,
-      status VARCHAR,
-      FOREIGN KEY (id_service) REFERENCES service(id) ON DELETE CASCADE ON UPDATE CASCADE,
-      FOREIGN KEY (id_client) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE,
-      FOREIGN KEY (id_master) REFERENCES masters(id) ON DELETE CASCADE ON UPDATE CASCADE))")
+                    id INTEGER primary key,
+                    id_service,
+                    id_client,
+                    id_master,
+                    cur_time DATETIME,
+                    status VARCHAR,
+                    FOREIGN KEY (id_service) REFERENCES service(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (id_client) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (id_master) REFERENCES masters(id) ON DELETE CASCADE ON UPDATE CASCADE))")
 
 {
 

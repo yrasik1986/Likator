@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Категории</string>
+   <string>Категории услуг</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
