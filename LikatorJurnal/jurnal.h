@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QTimeEdit>
 #include <QLineEdit>
+#include <QDate>
 
 namespace Ui {
 class Jurnal;
@@ -24,6 +25,7 @@ public:
 
 private slots:
        void selectedDateChanged();
+       void click(const QDate& date);
 
 private:
     Ui::Jurnal *ui;

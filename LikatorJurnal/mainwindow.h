@@ -67,6 +67,7 @@ private slots:
     void OpenStatistick();
     void closeDevice();
     void openSetting();
+    void openJurnal();
     void insertCompletion(QString str);
 
 private:
@@ -111,6 +112,7 @@ private:
      QAction *timetableAct;
      QAction *catMasterAct;
      QAction *masterAct;
+     QAction *jurnalAct;
 
      quint16 _vendor_id;
      quint16 _product_id;

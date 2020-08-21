@@ -30,6 +30,7 @@ private:
     const QString CAT_MASTERS_SQL;
     const QString MASTERS_SQL;
     const QString DAY_MASTERS_SQL;
+    const QString TIMETABLE_MASTERS_SQL;
     QSqlQuery *query;
     QSqlDatabase db;
     bool isOpenDb;
