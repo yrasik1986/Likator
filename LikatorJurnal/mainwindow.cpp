@@ -420,6 +420,13 @@ void MainWindow::createActions()
     masterAct->setStatusTip(tr("Редактирование таблицы мастеров"));
     connect(masterAct, &QAction::triggered, this, &MainWindow::OpenMaster);
 
+
+            jurnalAct = new QAction(tr("&Журнал"), this);
+            jurnalAct->setEnabled(true);
+            jurnalAct->setShortcuts(QKeySequence::Redo);
+            jurnalAct->setStatusTip(tr("Запись клиентов к мастерам"));
+            connect(jurnalAct, &QAction::triggered, this, &MainWindow::openJurnal);
+
     discontAct = new QAction(tr("&Политика дисконта"), this);
     //discontAct->setCheckable(true);
     discontAct->setEnabled(true);
@@ -464,6 +471,7 @@ void MainWindow::createMenus()
     editMenu = menuBar()->addMenu(tr("&Параметры"));
     editMenu->addAction(discontAct);
     editMenu->addAction(timetableAct);
+    editMenu->addAction(jurnalAct);
 
 
    // helpMenu = menuBar()->addMenu(tr("&Справка"));
@@ -482,6 +490,7 @@ void MainWindow::createMenus()
     editMenu->addAction(statistickAct);
     editMenu->addSeparator();
     editMenu->addAction(settingAct);
+
 }
 
 void MainWindow::OpenPoliticDiscont(){
@@ -514,6 +523,13 @@ void MainWindow::openSetting(){
     setting->setModal(true);
     connect(setting, &Setting::changAdressLine, info, &HumanInfo::changeLineAdress);
     setting->exec();
+}
+
+void MainWindow::openJurnal()
+{
+    jurnal = new Jurnal();
+    jurnal->setModal(true);
+    jurnal->exec();
 }
 
 void MainWindow::OpenStatistick(){

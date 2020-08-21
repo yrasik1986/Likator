@@ -8,8 +8,9 @@ Jurnal::Jurnal(QDialog *parent) :
     ui(new Ui::Jurnal)
 {
     ui->setupUi(this);
-    connect(ui->calendarWidget, &QCalendarWidget::selectionChanged,
-            this, &Jurnal::selectedDateChanged);
+   // connect(ui->calendarWidget, &QCalendarWidget::selectionChanged,this, &Jurnal::selectedDateChanged);
+    //void clicked(const QDate &date);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked,this, &Jurnal::click);
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::VerticalHeaderFormat(QCalendarWidget::NoVerticalHeader));
 
 
@@ -20,6 +21,25 @@ Jurnal::Jurnal(QDialog *parent) :
         ui->verticalLayout->addWidget(p);
         delete p;
     }
+
+
+    ui->tableView->setEditTriggers(QAbstractItemView::EditTrigger::AnyKeyPressed);
+    ui->tableView->horizontalHeader()->setStretchLastSection(true);
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery q;
+    q.prepare(R"(SELECT  masters.name_master
+              || ' ' || masters.fam_master || ' ' || masters.firstname_master,
+              masters.birth_master, masters.phone_master
+              FROM masters)");
+    q.exec();
+    model->setQuery(q);
+    ui->tableView->setModel(model);
+    model->setHeaderData(0, Qt::Horizontal, tr("Категория мастера"));
+    model->setHeaderData(1, Qt::Horizontal, tr("ФИО"));
+    model->setHeaderData(2, Qt::Horizontal, tr("День Рождения"));
+    model->setHeaderData(3, Qt::Horizontal, tr("телефон"));
+    ui->tableView->resizeColumnsToContents();
 
 
 
@@ -61,5 +81,11 @@ void Jurnal::selectedDateChanged(){
 //    model->setHeaderData(2, Qt::Horizontal, tr("время окончания работы"));
 //    ui->tableView->resizeColumnsToContents();
     qDebug() << "Hello";
-    ui->dateEdit->setDate(ui->calendarWidget->selectedDate());
+    //ui->dateEdit->setDate(ui->calendarWidget->selectedDate());
+}
+
+void Jurnal::click(const QDate &date)
+{
+     ui->dateEdit->setDate(date);
+
 }

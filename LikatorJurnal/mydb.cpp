@@ -67,24 +67,29 @@ MyDb::MyDb(QObject *parent) : QObject(parent),
 
     MASTERS_SQL(R"(CREATE TABLE masters (
                     id INTEGER primary key,
-                    id_cat_master INTEGER,
                     name_master VARCHAR,
                     fam_master VARCHAR,
                     firstname_master VARCHAR,
                     birth_master DATE,
-                    phone_master VARCHAR,
-                    FOREIGN KEY (id_cat_master) REFERENCES cat_masters(id) ON DELETE CASCADE ON UPDATE CASCADE))"),
+                    phone_master VARCHAR))"),
 
     DAY_MASTERS_SQL(R"(CREATE TABLE day_master (
                     id INTEGER primary key,
-                    id_service,
-                    id_client,
-                    id_master,
+                    id_service INTEGER,
+                    id_client INTEGER,
+                    id_master INTEGER,
                     cur_time DATETIME,
                     status VARCHAR,
                     FOREIGN KEY (id_service) REFERENCES service(id) ON DELETE CASCADE ON UPDATE CASCADE,
                     FOREIGN KEY (id_client) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                    FOREIGN KEY (id_master) REFERENCES masters(id) ON DELETE CASCADE ON UPDATE CASCADE))")
+                    FOREIGN KEY (id_master) REFERENCES masters(id) ON DELETE CASCADE ON UPDATE CASCADE))"),
+
+    TIMETABLE_MASTERS_SQL
+                    (R"(CREATE TABLE timetable_masters (
+                     id INTEGER primary key,
+                    cur_date DATETIME,
+                    id_day_master INTEGER,
+                    FOREIGN KEY (id_day_master) REFERENCES day_master(id) ON DELETE CASCADE ON UPDATE CASCADE))")
 
 {
 
