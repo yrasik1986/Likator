@@ -6,18 +6,7 @@ MasterChange::MasterChange(QWidget *parent) :
     ui(new Ui::MasterChange)
 {
     ui->setupUi(this);
-//    QSqlQuery sqlQ;
-//    if(sqlQ.exec("SELECT name, id FROM cat_masters")) {
-//        ui->CatMastersComboBox->clear();
-//        int i = 0;
-//        while (sqlQ.next()){
-//            ui->CatMastersComboBox->addItem(sqlQ.value(0).toString(),i++);
-//           idCatAndComboIndex[sqlQ.value(0).toString()] = sqlQ.value(1).toInt();
-//        }
-//    }
-
-//     connect(ui->CatMastersComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(updateFindLine(QString)));
-   updateFindLine(ui->CatMastersComboBox->currentText());
+    updateFindLine();
 }
 
 MasterChange::~MasterChange()
@@ -25,8 +14,8 @@ MasterChange::~MasterChange()
     delete ui;
 }
 
-void MasterChange::updateFindLine(QString currentCat){
-    qDebug() << currentCat;
+void MasterChange::updateFindLine()
+{
     QSqlQuery q;
     q.prepare(R"(SELECT  masters.id, masters.name_master
               || ' ' || masters.fam_master || ' ' || masters.firstname_master

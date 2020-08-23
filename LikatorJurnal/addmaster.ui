@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>410</width>
-    <height>280</height>
+    <height>374</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -30,8 +30,8 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_1">
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_5">
          <property name="font">
           <font>
            <family>Arial Black</family>
@@ -43,7 +43,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ФАМИЛИЯ</string>
+          <string>ТЕЛЕФОН</string>
          </property>
         </widget>
        </item>
@@ -64,8 +64,44 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="FamLineEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>Arial Black</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>ДЕНЬ РОЖДЕНИЯ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
        <item row="5" column="1">
         <widget class="CustomLineEdit" name="PhoneLineEdit"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="nameLineEdit"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="FatheNameLineEdit"/>
        </item>
        <item row="4" column="1">
         <widget class="QDateEdit" name="BirthdayDateEdit">
@@ -104,32 +140,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="FamLineEdit"/>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="nameLineEdit"/>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="font">
-          <font>
-           <family>Arial Black</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-           <underline>false</underline>
-          </font>
-         </property>
-         <property name="text">
-          <string>ДЕНЬ РОЖДЕНИЯ</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="CatMastersComboBox"/>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="font">
@@ -144,6 +154,23 @@
          </property>
          <property name="text">
           <string>ИМЯ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_1">
+         <property name="font">
+          <font>
+           <family>Arial Black</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>ФАМИЛИЯ</string>
          </property>
         </widget>
        </item>
@@ -163,26 +190,6 @@
           <string>КАТЕГОРИЯ</string>
          </property>
         </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="font">
-          <font>
-           <family>Arial Black</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-           <underline>false</underline>
-          </font>
-         </property>
-         <property name="text">
-          <string>ТЕЛЕФОН</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="FatheNameLineEdit"/>
        </item>
       </layout>
      </item>

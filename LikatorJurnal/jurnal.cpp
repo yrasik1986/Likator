@@ -13,19 +13,6 @@ Jurnal::Jurnal(QDialog *parent) :
     connect(ui->calendarWidget, &QCalendarWidget::clicked,this, &Jurnal::click);
     ui->calendarWidget->setVerticalHeaderFormat(QCalendarWidget::VerticalHeaderFormat(QCalendarWidget::NoVerticalHeader));
 
-
-
-    for (int i = 0 ; i < 4; ++i) {
-        QTimeEdit *p = new QTimeEdit();
-        //kalendar->push_back(p);
-        ui->verticalLayout->addWidget(p);
-        delete p;
-    }
-
-
-    ui->tableView->setEditTriggers(QAbstractItemView::EditTrigger::AnyKeyPressed);
-    ui->tableView->horizontalHeader()->setStretchLastSection(true);
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery q;
     q.prepare(R"(SELECT  masters.name_master
@@ -43,6 +30,32 @@ Jurnal::Jurnal(QDialog *parent) :
 
 
 
+
+//    ui->tableWidgeWorkday->setColumnCount(2);
+//    QStringList labels;
+//    labels << "Время " << "Статус";
+//    ui->tableWidgeWorkday->setHorizontalHeaderLabels(labels);
+
+//    int rowCountCatMaset = 0;
+//    while (q.next())
+//    {
+//        ui->tableWidgeWorkday->insertRow(rowCountCatMaset);
+//        QTableWidgetItem *select = new QTableWidgetItem;
+//        QTableWidgetItem *name = new QTableWidgetItem;
+
+//        select->setCheckState(Qt::Unchecked);
+//        name->setText(q.value(1).toString());
+
+//        ui->tableWidgeWorkday->setItem(rowCountCatMaset, 0, select);
+//        ui->tableWidgeWorkday->setItem(rowCountCatMaset, 1, name);
+//       // idCatMasters.push_back(q.value(0).toInt());
+
+//        rowCountCatMaset++;
+//    }
+
+
+
+
 }
 
 Jurnal::~Jurnal()
@@ -51,41 +64,74 @@ Jurnal::~Jurnal()
 }
 
 void Jurnal::selectedDateChanged(){
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
-    QSqlQueryModel *model = new QSqlQueryModel();
-    QSqlQuery q;
-    q.prepare("SELECT day_in_week, time_start, time_finish FROM timetable_salon");
-    //q.addBindValue(_id);
-    q.exec();
-    QVector<QPair<QString, QPair<QTime, QTime>>> timetable;
-
-
-    while (q.next()) {
-
-       // ui->timeEdit->setTime(q.value(1).toTime());
-       // ui->timeEdit_2->setTime(q.value(2).toTime());
-
-         timetable.push_back(qMakePair(QString(q.value(0).toString()),
-                                       qMakePair(q.value(1).toTime(), q.value(2).toTime())));
-    }
-
-    for(const auto& item: timetable) {
-        qDebug() << item.first << item.second.first.toString("hh:mm") << item.second.second.toString("hh:mm");
-    }
-//    model->setQuery(q);
-//    ui->tableView->setModel(model);
-//    model->setHeaderData(0, Qt::Horizontal, tr("день недели"));
-//    model->setHeaderData(1, Qt::Horizontal, tr("время начала работы"));
-//    model->setHeaderData(2, Qt::Horizontal, tr("время окончания работы"));
-//    ui->tableView->resizeColumnsToContents();
-    qDebug() << "Hello";
-    //ui->dateEdit->setDate(ui->calendarWidget->selectedDate());
 }
 
 void Jurnal::click(const QDate &date)
 {
      ui->dateEdit->setDate(date);
+
+     qDebug() <<  date.dayOfWeek();
+
+     QSqlQuery q;
+     q.prepare(R"(SELECT time_start, time_finish
+               FROM timetable_salon
+               WHERE day_in_week = ?)");
+     q.addBindValue(date.dayOfWeek());
+     if (!q.exec()){
+         qDebug() << "Error!";
+         return;
+     }
+
+     q.next();
+
+     QTime startTime = q.value(0).toTime();
+     QTime finTime = q.value(1).toTime();
+     QTime deltaTime = QTime(00,30,00,00);
+
+     ui->tableWidgeWorkday->setColumnCount(2);
+     QStringList labels;
+     labels << "Время " << "Статус";
+     ui->tableWidgeWorkday->setHorizontalHeaderLabels(labels);
+     int rowCountCatMaset = 0;
+     while (startTime != finTime)
+     {
+         ui->tableWidgeWorkday->insertRow(rowCountCatMaset);
+         QTableWidgetItem *select = new QTableWidgetItem;
+         QTableWidgetItem *name = new QTableWidgetItem;
+
+         select->setCheckState(Qt::Unchecked);
+         name->setText(startTime.toString());
+
+         ui->tableWidgeWorkday->setItem(rowCountCatMaset, 1, select);
+         ui->tableWidgeWorkday->setItem(rowCountCatMaset, 0, name);
+         startTime = startTime.addSecs(deltaTime.minute()*60);
+
+         rowCountCatMaset++;
+     }
+
+
+
+//         ui->tableWidgeWorkday->setColumnCount(2);
+//         QStringList labels;
+//         labels << "Время " << "Статус";
+//         ui->tableWidgeWorkday->setHorizontalHeaderLabels(labels);
+
+//         int rowCountCatMaset = 0;
+//         while (q.next())
+//         {
+//             ui->tableWidgeWorkday->insertRow(rowCountCatMaset);
+//             QTableWidgetItem *select = new QTableWidgetItem;
+//             QTableWidgetItem *name = new QTableWidgetItem;
+
+//             select->setCheckState(Qt::Unchecked);
+//             name->setText(q.value(1).toString());
+
+//             ui->tableWidgeWorkday->setItem(rowCountCatMaset, 0, select);
+//             ui->tableWidgeWorkday->setItem(rowCountCatMaset, 1, name);
+//            // idCatMasters.push_back(q.value(0).toInt());
+
+//             rowCountCatMaset++;
+//         }
 
 }

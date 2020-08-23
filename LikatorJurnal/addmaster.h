@@ -2,12 +2,14 @@
 #define ADDMASTER_H
 
 #include <QDialog>
+#include <QSqlQueryModel>
 #include <QSql>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMessageBox>
 #include <QMap>
+#include <QVector>
 #include <QDebug>
 
 namespace Ui {
@@ -32,6 +34,8 @@ private slots:
 private:
     Ui::AddMaster *ui;
     QMap<QString,int> idCatAndComboIndex;
+    int rowCountCatMaset;
+    QVector<int> idCatMasters;
 };
 
 #endif // ADDMASTER_H

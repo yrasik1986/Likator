@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1025</width>
-    <height>694</height>
+    <width>1197</width>
+    <height>715</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,151 +36,20 @@
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>70</y>
-     <width>621</width>
+     <x>1010</x>
+     <y>270</y>
+     <width>141</width>
      <height>281</height>
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QTableWidget" name="tableWidgeWorkday">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>370</y>
-     <width>421</width>
-     <height>223</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>пн</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_2"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>вт</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_3"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_4"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>ср</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_5"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_6"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>чт</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_7"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_8"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>пт</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_9"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_10"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>сб</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_11"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_12"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
-      <item>
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>вс</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_13"/>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="timeEdit_14"/>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QListView" name="listViewMasters">
-   <property name="geometry">
-    <rect>
-     <x>660</x>
-     <y>390</y>
-     <width>256</width>
-     <height>192</height>
+     <x>300</x>
+     <y>10</y>
+     <width>241</width>
+     <height>691</height>
     </rect>
    </property>
   </widget>

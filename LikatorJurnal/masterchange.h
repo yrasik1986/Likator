@@ -23,7 +23,7 @@ public:
     ~MasterChange();
 
 private slots:
-    void updateFindLine(QString currentCat);
+    void updateFindLine();
     void insertCompletion(QString);
     void on_CanselButton_clicked();
 

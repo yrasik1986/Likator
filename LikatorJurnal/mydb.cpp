@@ -59,7 +59,7 @@ MyDb::MyDb(QObject *parent) : QObject(parent),
                     id INTEGER primary key,
                     time_start DATETIME,
                     time_finish DATETIME,
-                    day_in_week varchar))"),
+                    day_in_week int))"),
 
     CAT_MASTERS_SQL(R"(CREATE TABLE cat_masters (
                     id INTEGER primary key,
@@ -89,7 +89,17 @@ MyDb::MyDb(QObject *parent) : QObject(parent),
                      id INTEGER primary key,
                     cur_date DATETIME,
                     id_day_master INTEGER,
-                    FOREIGN KEY (id_day_master) REFERENCES day_master(id) ON DELETE CASCADE ON UPDATE CASCADE))")
+                    FOREIGN KEY (id_day_master) REFERENCES day_master(id) ON DELETE CASCADE ON UPDATE CASCADE))"),
+
+
+    TIMETABLE_MASTER_CAT_ID_SQL
+                    (R"(CREATE TABLE master_cat_id (
+                     id INTEGER primary key,
+                    id_master INTEGER,
+                    id_cat_master INTEGER,
+                    status INTEGER NULL DEFAULT 0,
+                    FOREIGN KEY (id_master) REFERENCES masters(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (id_cat_master) REFERENCES cat_master(id) ON DELETE CASCADE ON UPDATE CASCADE))")
 
 {
 
@@ -143,6 +153,12 @@ QSqlError MyDb::initDb( const QString& nameBd){
     if (tables.contains("day_master", Qt::CaseInsensitive))
         return QSqlError();
 
+    if (tables.contains("timetable_masters", Qt::CaseInsensitive))
+        return QSqlError();
+
+    if (tables.contains("master_cat_id", Qt::CaseInsensitive))
+        return QSqlError();
+
 
     if (!q.exec(PEOPLE_SQL))
         return q.lastError();
@@ -177,6 +193,12 @@ QSqlError MyDb::initDb( const QString& nameBd){
     if (!q.exec(DAY_MASTERS_SQL))
         return q.lastError();
 
+    if (!q.exec(TIMETABLE_MASTERS_SQL))
+        return q.lastError();
+
+    if (!q.exec(TIMETABLE_MASTER_CAT_ID_SQL))
+        return q.lastError();
+
     q.prepare(R"(INSERT INTO policity_discont(summa,
                             text_sms, status, last_discont_code) values(?, ?, ?, ?))");
     q.addBindValue(10);
@@ -193,14 +215,14 @@ QSqlError MyDb::initDb( const QString& nameBd){
     q.prepare(R"(INSERT INTO cat_masters (name) values ("Парикмахер"), ("Мастер по маникюру"), ("Косметолог"))");
     q.exec();
 
-    QVector<QPair<QString, QPair<QTime, QTime>>> timetable;
-    timetable.push_back(qMakePair(QString("пн"), qMakePair(QTime(10,00), QTime(21,00))));
-    timetable.push_back(qMakePair(QString("вт"), qMakePair(QTime(10,00), QTime(21,00))));
-    timetable.push_back(qMakePair(QString("ср"), qMakePair(QTime(10,00), QTime(21,00))));
-    timetable.push_back(qMakePair(QString("чт"), qMakePair(QTime(10,00), QTime(21,00))));
-    timetable.push_back(qMakePair(QString("пт"), qMakePair(QTime(10,00), QTime(21,00))));
-    timetable.push_back(qMakePair(QString("сб"), qMakePair(QTime(10,00), QTime(17,00))));
-    timetable.push_back(qMakePair(QString("вс"), qMakePair(QTime(10,00), QTime(17,00))));
+    QVector<QPair<int, QPair<QTime, QTime>>> timetable;
+    timetable.push_back(qMakePair(1, qMakePair(QTime(10,00), QTime(21,00))));
+    timetable.push_back(qMakePair(2, qMakePair(QTime(10,00), QTime(21,00))));
+    timetable.push_back(qMakePair(3, qMakePair(QTime(10,00), QTime(21,00))));
+    timetable.push_back(qMakePair(4, qMakePair(QTime(10,00), QTime(21,00))));
+    timetable.push_back(qMakePair(5, qMakePair(QTime(10,00), QTime(21,00))));
+    timetable.push_back(qMakePair(6, qMakePair(QTime(10,00), QTime(17,00))));
+    timetable.push_back(qMakePair(7, qMakePair(QTime(10,00), QTime(17,00))));
 
     for(auto item: timetable) {
         q.prepare(R"(INSERT INTO timetable_salon(time_start, time_finish, day_in_week ) values(?, ?, ?))");

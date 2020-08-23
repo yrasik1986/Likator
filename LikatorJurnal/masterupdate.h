@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QMap>
+#include <QVector>
 #include <QDebug>
 
 namespace Ui {
@@ -32,6 +33,7 @@ private:
     Ui::MasterUpdate *ui;
     QMap<int, QString> idCatAndComboIndex;
     int _idMaster;
+    QVector<int> idMasterCats;
 };
 
 #endif // MASTERUPDATE_H
