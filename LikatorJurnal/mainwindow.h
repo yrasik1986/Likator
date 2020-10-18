@@ -56,8 +56,6 @@ private slots:
     void replyStatus(QNetworkReply *);
     void replyBalance(QNetworkReply *);
     void SetNetworkConnection();
-  //  void on_statusButton_clicked();
-  //  void on_balnceButton_clicked();
     void discontInsertSlot(int id, int cost);
     void updateFindLine();
     void OpenPoliticDiscont();
