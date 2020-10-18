@@ -15,7 +15,7 @@ public:
 
 signals:
 private:
-    QSerialPort *port;
+    QSerialPort *_port;
 
 };
 

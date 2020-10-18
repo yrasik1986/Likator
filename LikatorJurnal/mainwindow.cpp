@@ -501,7 +501,7 @@ void MainWindow::OpenPoliticDiscont(){
 
 void MainWindow::closeDevice(){
     deviceConnection = false;
-    qDebug() << "close port!!";
+    qDebug() << "close _port!!";
 }
 
 void MainWindow::DeviseConnect(quint16 vendor_id, quint16 product_id){

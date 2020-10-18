@@ -18,6 +18,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    CoreApp.cpp \
+    CoreGui.cpp \
+    MenuController.cpp \
     addcatmaster.cpp \
     addmaster.cpp \
     catadd.cpp \
@@ -52,6 +55,9 @@ SOURCES += \
 
 
 HEADERS  += \
+    CoreApp.h \
+    CoreGui.h \
+    MenuController.h \
     addcatmaster.h \
     addmaster.h \
     catadd.h \

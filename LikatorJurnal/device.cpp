@@ -1,8 +1,9 @@
 #include "device.h"
 
-Device::Device(QObject *parent) : QObject(parent)
+Device::Device(QObject *parent)
+    : QObject(parent)
+    , _port (new QSerialPort(this))
 {
-    port = new QSerialPort();
 
 }
 
@@ -12,22 +13,22 @@ bool Device::FindDevise(const quint16 unoVendorId, const quint16 unoProductId){
            if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()) {
                if(serialPortInfo.vendorIdentifier() == unoVendorId
                        && serialPortInfo.productIdentifier() == unoProductId) {
-                   port->setPortName(serialPortInfo.portName());
-                   port->open(QSerialPort::ReadOnly);
-                   if (port->isOpen()){
+                   _port->setPortName(serialPortInfo.portName());
+                   _port->open(QSerialPort::ReadOnly);
+                   if (_port->isOpen()){
                        sucsesfull = true;
                    }
-                   port->setBaudRate(QSerialPort::Baud9600);
-                   port->setDataBits(QSerialPort::Data8);
-                   port->setParity(QSerialPort::NoParity);
-                   port->setStopBits(QSerialPort::OneStop);
-                   port->setFlowControl(QSerialPort::NoFlowControl);
+                   _port->setBaudRate(QSerialPort::Baud9600);
+                   _port->setDataBits(QSerialPort::Data8);
+                   _port->setParity(QSerialPort::NoParity);
+                   _port->setStopBits(QSerialPort::OneStop);
+                   _port->setFlowControl(QSerialPort::NoFlowControl);
                }
          }
       }
-    return sucsesfull;;
+    return sucsesfull;
 }
 
 QSerialPort* Device::GetPort(){
-    return port;
+    return _port;
 }
